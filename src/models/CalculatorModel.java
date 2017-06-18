@@ -9,5 +9,5 @@ public class CalculatorModel {
 
     public int calculationValue(){
         return calculationValue;
-    }
+    } 
 }
