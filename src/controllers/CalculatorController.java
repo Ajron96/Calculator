@@ -16,16 +16,16 @@ public class CalculatorController {
             int firstNumber = calculatorView.getFirstNumber();
             int secondNumber = calculatorView.getSecondNumber();
 
-            new Thread(new Calculation(firstNumber, secondNumber)).start();
+            new Thread(new CalculationThread(firstNumber, secondNumber)).start();
 
         });
     }
 
-    private class Calculation implements Runnable{
+    private class CalculationThread implements Runnable{
         int firstNumber;
         int secondNumber;
 
-        Calculation(int firstNumber, int secondNumber){
+        CalculationThread(int firstNumber, int secondNumber){
             this.firstNumber = firstNumber;
             this.secondNumber  = secondNumber;
         }
