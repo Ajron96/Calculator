@@ -3,6 +3,10 @@ package controllers;
 import models.CalculatorModel;
 import views.CalculatorView;
 
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import java.awt.event.ActionEvent;
+
 public class CalculatorController {
     private CalculatorModel calculatorModel;
     private CalculatorView calculatorView;
@@ -12,35 +16,100 @@ public class CalculatorController {
         this.calculatorModel = calculatorModel;
         this.calculatorView = calculatorView;
 
-        calculatorView.addCalculationListener(calcEvent -> {
-            int firstNumber = calculatorView.getFirstNumber();
-            int secondNumber = calculatorView.getSecondNumber();
-
-            new Thread(new CalculationThread(firstNumber, secondNumber)).start();
-
-        });
+        calculatorView.addCalculationListeners(e -> new Thread(new CalculationThread(e)).start() );
     }
 
     private class CalculationThread implements Runnable{
-        int firstNumber;
-        int secondNumber;
+        private ActionEvent e;
 
-        CalculationThread(int firstNumber, int secondNumber){
-            this.firstNumber = firstNumber;
-            this.secondNumber  = secondNumber;
+        CalculationThread(ActionEvent e){
+            this.e = e;
         }
 
         @Override
         public void run(){
-            try{
-                calculatorModel.addTwoNumbers(firstNumber, secondNumber);
+            double firstNumber;
+            double secondNumber;
+            JTextField viewCalcArea = calculatorView.getCalcArea();
+            String viewCalcAreaText = viewCalcArea.getText();
 
-                calculatorView.setCalculateSolution(calculatorModel.calculationValue());
-            }
-            catch(NumberFormatException e){
-                calculatorView.displayErrorMessage("You need to enter 2 integers");
-            }
+            if(e.getSource() == calculatorView.getB1()){
+                viewCalcArea.setText(viewCalcAreaText.concat("1"));
+           }
+           if(e.getSource() == calculatorView.getB2()){
+               viewCalcArea.setText(viewCalcAreaText.concat("2"));
+           }
+           if(e.getSource() == calculatorView.getB3()){
+               viewCalcArea.setText(viewCalcAreaText.concat("3"));
+           }
+           if(e.getSource() == calculatorView.getB4()){
+               viewCalcArea.setText(viewCalcAreaText.concat("4"));
+           }
+           if(e.getSource() == calculatorView.getB5()){
+               viewCalcArea.setText(viewCalcAreaText.concat("5"));
+           }
+           if(e.getSource() == calculatorView.getB6()){
+               viewCalcArea.setText(viewCalcAreaText.concat("6"));
+           }
+           if(e.getSource() == calculatorView.getB7()){
+               viewCalcArea.setText(viewCalcAreaText.concat("7"));
+           }
+           if(e.getSource() == calculatorView.getB8()){
+               viewCalcArea.setText(viewCalcAreaText.concat("8"));
+           }
+           if(e.getSource() == calculatorView.getB9()){
+               viewCalcArea.setText(viewCalcAreaText.concat("9"));
+           }
+           if(e.getSource() == calculatorView.getB0()){
+               viewCalcArea.setText(viewCalcAreaText.concat("0"));
+           }
+           if(e.getSource() == calculatorView.getBAdd()){
+               firstNumber = Double.parseDouble(viewCalcAreaText);
+               calculatorModel.setFirstNumber(firstNumber);
+               calculatorModel.setOperator(1);
+               viewCalcArea.setText("");
+           }
+           if(e.getSource() == calculatorView.getBSub()){
+               firstNumber = Double.parseDouble(viewCalcAreaText);
+               calculatorModel.setFirstNumber(firstNumber);
+               calculatorModel.setOperator(2);
+               viewCalcArea.setText("");
+           }
+           if(e.getSource() == calculatorView.getBMul()){
+               firstNumber = Double.parseDouble(viewCalcAreaText);
+               calculatorModel.setFirstNumber(firstNumber);
+               calculatorModel.setOperator(3);
+               viewCalcArea.setText("");
+           }
+           if(e.getSource() == calculatorView.getBDiv()){
+               firstNumber = Double.parseDouble(viewCalcAreaText);
+               calculatorModel.setFirstNumber(firstNumber);
+               calculatorModel.setOperator(4);
+               viewCalcArea.setText("");
+           }
+           if(e.getSource() == calculatorView.getBRes()){
+               secondNumber = Double.parseDouble(viewCalcArea.getText());
+               calculatorModel.setSecondNumber(secondNumber);
+
+               calculatorModel.solveCalculation();
+
+               viewCalcArea.setText( Double.toString(calculatorModel.getCalculationValue()) );
+           }
+           if(e.getSource() == calculatorView.getBDot()) {
+               viewCalcArea.setText(viewCalcArea.getText().concat("."));
+           }
+           if(e.getSource() == calculatorView.getBDel()){
+               String subCalcArea;
+               subCalcArea = viewCalcAreaText.substring( 0, viewCalcAreaText.length() - 1 );
+               viewCalcArea.setText(subCalcArea);
+           }
+           if(e.getSource() == calculatorView.getBClr()){
+               calculatorModel.setFirstNumber(0);
+               calculatorModel.setSecondNumber(0);
+               viewCalcArea.setText("");
+           }
         }
 
     }
+
 }
