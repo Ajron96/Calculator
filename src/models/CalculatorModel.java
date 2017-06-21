@@ -39,7 +39,7 @@ public class CalculatorModel {
         return this.firstNumInited;
     }
 
-    public void firstNumInited(boolean firstNumInited){
+    public void setFirstNumInited(boolean firstNumInited){
         this.firstNumInited = firstNumInited;
     }
 }

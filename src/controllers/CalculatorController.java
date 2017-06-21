@@ -110,7 +110,7 @@ public class CalculatorController {
                calculatorModel.setFirstNumber(0);
                calculatorModel.setSecondNumber(0);
                calculatorModel.setOperator(0);
-               calculatorModel.firstNumInited(false);
+               calculatorModel.setFirstNumInited(false);
                viewCalcArea.setText(""); 
            }
         }
