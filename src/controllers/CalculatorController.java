@@ -111,7 +111,7 @@ public class CalculatorController {
                calculatorModel.setSecondNumber(0);
                calculatorModel.setOperator(0);
                calculatorModel.firstNumInited(false);
-               viewCalcArea.setText("");
+               viewCalcArea.setText(""); 
            }
         }
     }
