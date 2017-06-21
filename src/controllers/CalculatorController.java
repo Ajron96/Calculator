@@ -4,7 +4,6 @@ import models.CalculatorModel;
 import views.CalculatorView;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.event.ActionEvent;
 
 public class CalculatorController {
@@ -33,7 +32,7 @@ public class CalculatorController {
             JTextField viewCalcArea = calculatorView.getCalcArea();
             String viewCalcAreaText = viewCalcArea.getText();
 
-            if(e.getSource() == calculatorView.getB1()){
+           if(e.getSource() == calculatorView.getB1()){
                 viewCalcArea.setText(viewCalcAreaText.concat("1"));
            }
            if(e.getSource() == calculatorView.getB2()){
@@ -63,31 +62,35 @@ public class CalculatorController {
            if(e.getSource() == calculatorView.getB0()){
                viewCalcArea.setText(viewCalcAreaText.concat("0"));
            }
-           if(e.getSource() == calculatorView.getBAdd()){
+           if(e.getSource() == calculatorView.getBAdd() && viewCalcAreaText.matches("-?[0-9]+(.?([0-9])+)?")){
                firstNumber = Double.parseDouble(viewCalcAreaText);
                calculatorModel.setFirstNumber(firstNumber);
                calculatorModel.setOperator(1);
                viewCalcArea.setText("");
            }
            if(e.getSource() == calculatorView.getBSub()){
-               firstNumber = Double.parseDouble(viewCalcAreaText);
-               calculatorModel.setFirstNumber(firstNumber);
-               calculatorModel.setOperator(2);
-               viewCalcArea.setText("");
+               if(viewCalcAreaText.length() == 0){
+                   viewCalcArea.setText(viewCalcAreaText.concat("-"));
+               }else if(viewCalcAreaText.matches("-?[0-9]+(.?([0-9])+)?")){
+                   firstNumber = Double.parseDouble(viewCalcAreaText);
+                   calculatorModel.setFirstNumber(firstNumber);
+                   calculatorModel.setOperator(2);
+                   viewCalcArea.setText("-");
+               }
            }
-           if(e.getSource() == calculatorView.getBMul()){
+           if(e.getSource() == calculatorView.getBMul() && viewCalcAreaText.matches("-?[0-9]+(.?([0-9])+)?")){
                firstNumber = Double.parseDouble(viewCalcAreaText);
                calculatorModel.setFirstNumber(firstNumber);
                calculatorModel.setOperator(3);
                viewCalcArea.setText("");
            }
-           if(e.getSource() == calculatorView.getBDiv()){
+           if(e.getSource() == calculatorView.getBDiv() && viewCalcAreaText.matches("-?[0-9]+(.?([0-9])+)?")){
                firstNumber = Double.parseDouble(viewCalcAreaText);
                calculatorModel.setFirstNumber(firstNumber);
                calculatorModel.setOperator(4);
                viewCalcArea.setText("");
            }
-           if(e.getSource() == calculatorView.getBRes()){
+           if(e.getSource() == calculatorView.getBRes() && calculatorModel.isFirstNumInited()){
                secondNumber = Double.parseDouble(viewCalcArea.getText());
                calculatorModel.setSecondNumber(secondNumber);
 
@@ -95,10 +98,10 @@ public class CalculatorController {
 
                viewCalcArea.setText( Double.toString(calculatorModel.getCalculationValue()) );
            }
-           if(e.getSource() == calculatorView.getBDot()) {
+           if(e.getSource() == calculatorView.getBDot() && viewCalcAreaText.matches("-?[0-9]+(.?([0-9])+)?")) {
                viewCalcArea.setText(viewCalcArea.getText().concat("."));
            }
-           if(e.getSource() == calculatorView.getBDel()){
+           if(e.getSource() == calculatorView.getBDel() && viewCalcAreaText.length() > 0){
                String subCalcArea;
                subCalcArea = viewCalcAreaText.substring( 0, viewCalcAreaText.length() - 1 );
                viewCalcArea.setText(subCalcArea);
@@ -106,10 +109,10 @@ public class CalculatorController {
            if(e.getSource() == calculatorView.getBClr()){
                calculatorModel.setFirstNumber(0);
                calculatorModel.setSecondNumber(0);
+               calculatorModel.setOperator(0);
+               calculatorModel.firstNumInited(false);
                viewCalcArea.setText("");
            }
         }
-
     }
-
 }

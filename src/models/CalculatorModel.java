@@ -5,6 +5,7 @@ public class CalculatorModel {
     private double secondNumber;
     private double calculationValue;
     private int operator;
+    private boolean firstNumInited;
 
     public void solveCalculation(){
 
@@ -18,6 +19,7 @@ public class CalculatorModel {
     }
 
     public void setFirstNumber(double firstNumber){
+        firstNumInited = true;
         this.firstNumber = firstNumber;
     }
 
@@ -31,5 +33,13 @@ public class CalculatorModel {
 
     public double getCalculationValue(){
         return calculationValue;
+    }
+
+    public boolean isFirstNumInited(){
+        return this.firstNumInited;
+    }
+
+    public void firstNumInited(boolean firstNumInited){
+        this.firstNumInited = firstNumInited;
     }
 }
