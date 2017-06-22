@@ -11,9 +11,8 @@ public class CalculatorModel {
 
        switch(operator){
            case 1: calculationValue = firstNumber + secondNumber; break;
-           case 2: calculationValue = firstNumber - secondNumber; break;
-           case 3: calculationValue = firstNumber * secondNumber; break;
-           case 4: calculationValue = firstNumber / secondNumber; break;
+           case 2: calculationValue = firstNumber * secondNumber; break;
+           case 3: calculationValue = firstNumber / secondNumber; break;
            default: calculationValue = 0;
        }
     }
