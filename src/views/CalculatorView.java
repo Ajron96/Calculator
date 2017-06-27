@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class CalculatorView extends JFrame {
+    private JPanel calcPanel;
     private JTextField calcArea;
     private JButton b1;
     private JButton b2;
@@ -28,85 +29,13 @@ public class CalculatorView extends JFrame {
     public CalculatorView(){
         super("Calculator");
 
-        JPanel calcPanel = new JPanel();
-
-        calcArea = new JTextField();
-        b1 = new JButton("1");
-        b2 = new JButton("2");
-        b3 = new JButton("3");
-        b4 = new JButton("4");
-        b5 = new JButton("5");
-        b6 = new JButton("6");
-        b7 = new JButton("7");
-        b8 = new JButton("8");
-        b9 = new JButton("9");
-        b0 = new JButton("0");
-        bAdd = new JButton("+");
-        bSub = new JButton("-");
-        bMul = new JButton("*");
-        bDiv = new JButton("/");
-        bDot = new JButton(".");
-        bRes = new JButton("=");
-        bDel = new JButton("Delete");
-        bClr = new JButton("Clear");
-
-        calcPanel.setLayout(null);
+        calcPanel = new JPanel();
 
         setSize(350,500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        calcArea.setEditable(false);
-        calcArea.setBackground(Color.white);
-        calcArea.setBounds(30,40,280,30);
-
-        b7.setBounds(40,100,50,40);
-        b8.setBounds(110,100,50,40);
-        b9.setBounds(180,100,50,40);
-        bDiv.setBounds(250,100,50,40);
-
-        b4.setBounds(40,170,50,40);
-        b5.setBounds(110,170,50,40);
-        b6.setBounds(180,170,50,40);
-        bMul.setBounds(250,170,50,40);
-
-        b1.setBounds(40,240,50,40);
-        b2.setBounds(110,240,50,40);
-        b3.setBounds(180,240,50,40);
-        bSub.setBounds(250,240,50,40);
-
-        bDot.setBounds(40,310,50,40);
-        b0.setBounds(110,310,50,40);
-        bRes.setBounds(180,310,50,40);
-        bAdd.setBounds(250,310,50,40);
-
-        bDel.setBounds(60,380,100,40);
-        bClr.setBounds(180,380,100,40);
-
-        calcPanel.add(calcArea);
-        calcPanel.add(b1);
-        calcPanel.add(b2);
-        calcPanel.add(b3);
-        calcPanel.add(b4);
-        calcPanel.add(b5);
-        calcPanel.add(b6);
-        calcPanel.add(b7);
-        calcPanel.add(b8);
-        calcPanel.add(b9);
-        calcPanel.add(b0);
-        calcPanel.add(bAdd);
-        calcPanel.add(bSub);
-        calcPanel.add(bMul);
-        calcPanel.add(bDiv);
-        calcPanel.add(bRes);
-        calcPanel.add(bDot);
-        calcPanel.add(bDel);
-        calcPanel.add(bClr);
-
-        add(calcPanel);
-
-        setVisible(true);
-
+        createComponents();
     }
 
     public JTextField getCalcArea() {
@@ -204,6 +133,81 @@ public class CalculatorView extends JFrame {
         bDot.addActionListener(buttonListener);
         bDel.addActionListener(buttonListener);
         bClr.addActionListener(buttonListener);
+    }
+
+    private void createComponents(){
+        calcArea = new JTextField();
+        b1 = new JButton("1");
+        b2 = new JButton("2");
+        b3 = new JButton("3");
+        b4 = new JButton("4");
+        b5 = new JButton("5");
+        b6 = new JButton("6");
+        b7 = new JButton("7");
+        b8 = new JButton("8");
+        b9 = new JButton("9");
+        b0 = new JButton("0");
+        bAdd = new JButton("+");
+        bSub = new JButton("-");
+        bMul = new JButton("*");
+        bDiv = new JButton("/");
+        bDot = new JButton(".");
+        bRes = new JButton("=");
+        bDel = new JButton("Delete");
+        bClr = new JButton("Clear");
+
+        calcPanel.setLayout(null);
+
+        calcArea.setEditable(false);
+        calcArea.setBackground(Color.white);
+        calcArea.setBounds(30,40,280,30);
+
+        b7.setBounds(40,100,50,40);
+        b8.setBounds(110,100,50,40);
+        b9.setBounds(180,100,50,40);
+        bDiv.setBounds(250,100,50,40);
+
+        b4.setBounds(40,170,50,40);
+        b5.setBounds(110,170,50,40);
+        b6.setBounds(180,170,50,40);
+        bMul.setBounds(250,170,50,40);
+
+        b1.setBounds(40,240,50,40);
+        b2.setBounds(110,240,50,40);
+        b3.setBounds(180,240,50,40);
+        bSub.setBounds(250,240,50,40);
+
+        bDot.setBounds(40,310,50,40);
+        b0.setBounds(110,310,50,40);
+        bRes.setBounds(180,310,50,40);
+        bAdd.setBounds(250,310,50,40);
+
+        bDel.setBounds(60,380,100,40);
+        bClr.setBounds(180,380,100,40);
+
+        calcPanel.add(calcArea);
+        calcPanel.add(b1);
+        calcPanel.add(b2);
+        calcPanel.add(b3);
+        calcPanel.add(b4);
+        calcPanel.add(b5);
+        calcPanel.add(b6);
+        calcPanel.add(b7);
+        calcPanel.add(b8);
+        calcPanel.add(b9);
+        calcPanel.add(b0);
+        calcPanel.add(bAdd);
+        calcPanel.add(bSub);
+        calcPanel.add(bMul);
+        calcPanel.add(bDiv);
+        calcPanel.add(bRes);
+        calcPanel.add(bDot);
+        calcPanel.add(bDel);
+        calcPanel.add(bClr);
+
+        add(calcPanel);
+
+        setVisible(true);
     }
 
     public void displayErrorMessage(String errorMessage){
