@@ -30,6 +30,10 @@ public class CalculatorModel {
         this.operator = operator;
     }
 
+    public void setFirstNumInited(boolean firstNumInited){
+        this.firstNumInited = firstNumInited;
+    }
+
     public double getCalculationValue(){
         return calculationValue;
     }
@@ -38,7 +42,5 @@ public class CalculatorModel {
         return this.firstNumInited;
     }
 
-    public void setFirstNumInited(boolean firstNumInited){
-        this.firstNumInited = firstNumInited;
-    }
+
 }
