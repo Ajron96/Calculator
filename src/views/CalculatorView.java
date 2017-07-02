@@ -2,6 +2,9 @@ package views;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class CalculatorView extends JFrame {
@@ -28,6 +31,12 @@ public class CalculatorView extends JFrame {
 
     public CalculatorView(){
         super("Calculator");
+
+        try{
+            setIconImage(ImageIO.read(new File("images/CalculatorIcon.png")));
+        }catch(IOException e){
+            displayErrorMessage("Image cannot be loaded");
+        }
 
         calcPanel = new JPanel();
 
