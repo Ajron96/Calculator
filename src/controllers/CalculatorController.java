@@ -15,15 +15,15 @@ public class CalculatorController {
         this.calculatorModel = calculatorModel;
         this.calculatorView = calculatorView;
 
-        calculatorView.addCalculationListeners(e -> new Thread(new CalculationThread(e)).start() );
+        calculatorView.addCalculationListeners(e -> new Thread(new Calculate(e)).start() );
     }
 
-    private class CalculationThread implements Runnable{
+    private class Calculate implements Runnable{
         private ActionEvent e;
         JTextField viewCalcArea;    //reference to view's calcArea
         String viewCalcAreaText;    //text of viewCalcArea
 
-        private CalculationThread(ActionEvent e){
+        private Calculate(ActionEvent e){
             this.e = e;
             this.viewCalcArea = calculatorView.getCalcArea();
             this.viewCalcAreaText = viewCalcArea.getText();
